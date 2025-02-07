@@ -20,7 +20,6 @@
   <a href="#introduction"><strong>Introduction</strong></a> 
 	·&nbsp;<a href="#features"><strong>Features</strong></a> 
 	·&nbsp;<a href="#tech-stack"><strong>Tech Stack</strong></a>
-	·&nbsp;<a href="#local-development"><strong>Development Setup</strong></a> 
 </p>
 <br>
 
@@ -47,3 +46,7 @@ This repository showcases a simple and efficient **calculator** designed to perf
 - [Vite](https://vitejs.dev/) – building
 - [Vercel](https://vercel.com/) – deployment
   <br><br>
+
+  ## 🪪&nbsp;&nbsp; Licensing Information
+
+This project is licensed under the [MIT License](./LICENSE). Feel free to learn, add upon, and share!
