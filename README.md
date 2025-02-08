@@ -20,6 +20,7 @@
   <a href="#introduction"><strong>Introduction</strong></a> 
 	·&nbsp;<a href="#features"><strong>Features</strong></a> 
 	·&nbsp;<a href="#tech-stack"><strong>Tech Stack</strong></a>
+  ·&nbsp;<a href="#contributing"><strong>Contributing</strong></a>
 </p>
 <br>
 
@@ -47,6 +48,13 @@ This repository showcases a simple and efficient **calculator** designed to perf
 - [Vercel](https://vercel.com/) – deployment
   <br><br>
 
-  ## 🪪&nbsp;&nbsp; Licensing Information
+## Contributing
+
+Contributions are always welcome!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for ways to get started.
+</br></br>
+
+## 🪪&nbsp;&nbsp; Licensing Information
 
 This project is licensed under the [MIT License](./LICENSE). Feel free to learn, add upon, and share!
