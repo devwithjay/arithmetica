@@ -14,6 +14,7 @@ class Calculator {
     this.darkToggle = document.querySelector('.moon');
     this.numberButtons = document.querySelectorAll('.button');
     this.clearButton = document.querySelector('.control');
+    this.deleteButton = document.querySelector('.del')
   }
 
   initializeTheme() {
@@ -22,11 +23,9 @@ class Calculator {
   }
 
   attachEventListeners() {
-    // Theme toggles
     this.lightToggle.addEventListener('click', () => this.setTheme('light'));
     this.darkToggle.addEventListener('click', () => this.setTheme('dark'));
 
-    // Number and decimal buttons
     this.numberButtons.forEach(button => {
       const value = button.textContent;
       if (!isNaN(value) || value === '.') {
@@ -34,14 +33,34 @@ class Calculator {
       }
     });
 
-    // Clear button
     this.clearButton.addEventListener('click', () => this.clear());
+    this.deleteButton.addEventListener('click', () => this.delete())
   }
 
-  setTheme(theme) {
+  setTheme = theme => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-  }
+  };
+
+  delete = () => {
+    if (this.shouldResetDisplay) {
+      this.clear();
+      return;
+    }
+
+    if (this.displayString.endsWith(' ')) {
+      this.displayString = this.displayString.slice(0, -3);
+      this.operation = undefined;
+    } else {
+      this.displayString = this.displayString.slice(0, -1);
+    }
+
+    if (this.displayString === '' || this.displayString === '-') {
+      this.displayString = '0';
+    }
+
+    this.updateDisplay();
+  };
 
   appendNumber(number) {
     if (this.shouldResetDisplay) {
