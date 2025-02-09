@@ -35,7 +35,7 @@ html[data-theme='dark'] {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,10 +154,6 @@ body {
 
 .button.arithmetic.control {
   color: var(--text-control);
-}
-
-.del {
-  font-size: 2rem;
 }
 
 .button:hover {
