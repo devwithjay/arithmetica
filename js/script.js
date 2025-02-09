@@ -14,7 +14,8 @@ class Calculator {
     this.darkToggle = document.querySelector('.moon');
     this.numberButtons = document.querySelectorAll('.button');
     this.clearButton = document.querySelector('.control');
-    this.deleteButton = document.querySelector('.del')
+    this.deleteButton = document.querySelector('.del');
+    this.toggleSignButton = document.querySelector('.control:nth-child(2)');
   }
 
   initializeTheme() {
@@ -34,7 +35,8 @@ class Calculator {
     });
 
     this.clearButton.addEventListener('click', () => this.clear());
-    this.deleteButton.addEventListener('click', () => this.delete())
+    this.deleteButton.addEventListener('click', () => this.delete());
+    this.toggleSignButton.addEventListener('click', () => this.toggleSign());
   }
 
   setTheme = theme => {
@@ -57,6 +59,23 @@ class Calculator {
 
     if (this.displayString === '' || this.displayString === '-') {
       this.displayString = '0';
+    }
+
+    this.updateDisplay();
+  };
+
+  toggleSign = () => {
+    if (this.displayString.includes(' ')) {
+      const parts = this.displayString.split(' ');
+      const lastNumber = parts[parts.length - 1];
+
+      if (lastNumber !== '') {
+        parts[parts.length - 1] = (-parseFloat(lastNumber)).toString();
+        this.displayString = parts.join(' ');
+      }
+    } else {
+      const currentNumber = parseFloat(this.displayString);
+      this.displayString = (-currentNumber).toString();
     }
 
     this.updateDisplay();
