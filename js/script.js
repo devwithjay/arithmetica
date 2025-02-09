@@ -13,6 +13,7 @@ class Calculator {
     this.lightToggle = document.querySelector('.sun');
     this.darkToggle = document.querySelector('.moon');
     this.numberButtons = document.querySelectorAll('.button');
+    this.clearButton = document.querySelector('.control');
   }
 
   initializeTheme() {
@@ -32,6 +33,9 @@ class Calculator {
         button.addEventListener('click', () => this.appendNumber(value));
       }
     });
+
+    // Clear button
+    this.clearButton.addEventListener('click', () => this.clear());
   }
 
   setTheme(theme) {
@@ -53,6 +57,12 @@ class Calculator {
       this.displayString += number;
     }
 
+    this.updateDisplay();
+  }
+
+  clear() {
+    this.displayString = '0';
+    this.shouldResetDisplay = false;
     this.updateDisplay();
   }
 
