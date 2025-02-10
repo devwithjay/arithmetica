@@ -52,6 +52,9 @@ class Calculator {
     });
 
     this.equalsButton.addEventListener('click', () => this.compute());
+    document.addEventListener('keydown', event =>
+      this.handleKeyboardInput(event),
+    );
   }
 
   setTheme = theme => {
@@ -197,7 +200,7 @@ class Calculator {
 
   compute = () => {
     if (this.displayString.endsWith(' ') || this.displayString.trim() === '') {
-      return; 
+      return;
     }
 
     const result = this.evaluateExpression(this.displayString);
@@ -223,6 +226,33 @@ class Calculator {
     this.previousDisplay.textContent = this.previousOperand;
 
     this.display.scrollLeft = this.display.scrollWidth;
+  }
+
+  handleKeyboardInput(event) {
+    const key = event.key;
+
+    if (
+      (key >= '0' && key <= '9') ||
+      (key >= '0' && key <= '9' && event.code.startsWith('Numpad'))
+    ) {
+      this.appendNumber(key);
+    } else if (key === '.') {
+      this.appendNumber('.');
+    } else if (['+', '-', '*', '/', '%'].includes(key)) {
+      const operatorMap = {
+        '*': '×',
+        '/': '÷',
+      };
+      this.chooseOperation(operatorMap[key] || key);
+    } else if (key === 'Enter' || key === '=') {
+      this.compute();
+    } else if (key === 'Backspace') {
+      this.delete();
+    } else if (key === 'Escape' || key.toLowerCase() === 'c') {
+      this.clear();
+    } else if (key.toLowerCase() === 'n') {
+      this.toggleSign();
+    }
   }
 }
 
