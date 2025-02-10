@@ -2,6 +2,7 @@
   --text-control: #5fdacc;
   --text-arithmetic: #e76c6c;
   --transition-speed: 0.3s;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 html[data-theme='light'] {
@@ -15,6 +16,7 @@ html[data-theme='light'] {
   --text: #282b33;
   --icon-current: #d8d8d8;
   --icon-secondary: #060b0b;
+  --github-logo: #22252d;
 }
 
 html[data-theme='dark'] {
@@ -28,6 +30,7 @@ html[data-theme='dark'] {
   --text: #ffffff;
   --icon-current: #ffffff;
   --icon-secondary: #90939b;
+  --github-logo: #ffffff;
 }
 
 * {
@@ -52,8 +55,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
   padding: 1rem;
+  gap: 3rem;
+  margin-top: 1rem;
 }
 
 .header {
@@ -79,6 +83,7 @@ body {
   text-decoration: none;
   text-decoration-color: inherit;
   color: inherit;
+  animation: var(--animate-pulse);
 }
 
 .logo-url:hover {
@@ -108,7 +113,7 @@ body {
   transition: color var(--transition-speed) ease;
 }
 
-.icon:hover{
+.icon:hover {
   cursor: pointer;
 }
 
@@ -205,6 +210,30 @@ body {
   color: var(--text-arithmetic);
 }
 
+.github-logo {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin-right: 2px;
+}
+
+.github-logo svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--github-logo);
+  filter: invert(-1);
+  animation: var(--animate-pulse);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .header {
     position: absolute;
@@ -226,5 +255,11 @@ body {
 
   .calculator-container {
     margin-top: 2rem;
+  }
+
+  .github-logo {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem
   }
 }
