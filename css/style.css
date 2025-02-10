@@ -5,6 +5,7 @@
 }
 
 html[data-theme='light'] {
+  --logo: #030303;
   --bg-body: #f7f7f7;
   --bg-primary: #ffffff;
   --calculator-bg: #f9f9f9;
@@ -17,6 +18,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
+  --logo: #ffffff;
   --bg-body: #1e2128;
   --bg-primary: #22252d;
   --calculator-bg: #2a2d3a;
@@ -40,7 +42,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f3f3f3;
-  font-family: Arial, sans-serif;
+  font-family: Inter, Arial, sans-serif;
   background-color: var(--bg-body);
   transition: background-color var(--transition-speed) ease;
 }
@@ -50,7 +52,37 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
+  padding: 1rem;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--logo);
+  letter-spacing: 1.05px;
+  font-weight: 300;
+}
+
+.logo .logo-url a {
+  font-family: Inter, serif;
+  margin-left: 0.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-decoration-color: inherit;
+  color: inherit;
+}
+
+.logo-url:hover {
+  cursor: pointer;
 }
 
 .theme-toggle {
@@ -74,6 +106,10 @@ body {
   align-items: center;
   justify-content: center;
   transition: color var(--transition-speed) ease;
+}
+
+.icon:hover{
+  cursor: pointer;
 }
 
 .sun {
@@ -158,6 +194,7 @@ body {
 
 .button:hover {
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .button.control {
@@ -169,10 +206,22 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-  .theme-toggle {
+  .header {
     position: absolute;
-    right: 3rem;
     top: 2rem;
+    left: 0;
+    right: 0;
+    padding: 0 3rem;
+  }
+
+  .logo .logo-url a:hover {
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+    transition:
+      text-underline-offset 0.3s ease,
+      text-decoration-color 0.3s ease;
   }
 
   .calculator-container {
