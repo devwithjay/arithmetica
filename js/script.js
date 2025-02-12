@@ -117,7 +117,7 @@ class Calculator {
       '×': (a, b) => a * b,
       '÷': (a, b) => {
         if (b === 0) throw new Error('Division by zero');
-        return Number.isInteger(a / b) ? a / b : Number((a / b).toFixed(2));
+        return Number.isInteger(a / b) ? a / b : Number((a / b).toFixed(6));
       },
       '%': (a, b) => {
         if (b === 0) {
