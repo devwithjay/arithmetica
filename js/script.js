@@ -190,9 +190,18 @@ class Calculator {
   }
 
   chooseOperation = op => {
-    if (this.displayString === '' || this.displayString.endsWith(' ')) return;
+    if (this.displayString === '') return;
 
-    this.displayString += ` ${op} `;
+    const parts = this.displayString.trim().split(' ');
+    const lastPart = parts[parts.length - 1];
+
+    if (['+', '-', '×', '÷', '%'].includes(lastPart)) {
+      parts[parts.length - 1] = op;
+      this.displayString = parts.join(' ') + ' ';
+    } else {
+      this.displayString += ` ${op} `;
+    }
+
     this.operation = op;
     this.shouldResetDisplay = false;
     this.updateDisplay();
