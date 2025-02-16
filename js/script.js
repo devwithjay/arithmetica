@@ -112,9 +112,18 @@ class Calculator {
 
   applyOperation = (a, b, op) => {
     const operations = {
-      '+': (a, b) => a + b,
-      '-': (a, b) => a - b,
-      '×': (a, b) => a * b,
+      '+': (a, b) => {
+        const result = a + b;
+        return Number.isInteger(result) ? result : Number(result.toFixed(6));
+      },
+      '-': (a, b) => {
+        const result = a - b;
+        return Number.isInteger(result) ? result : Number(result.toFixed(6));
+      },
+      '×': (a, b) => {
+        const result = a * b;
+        return Number.isInteger(result) ? result : Number(result.toFixed(6));
+      },
       '÷': (a, b) => {
         if (b === 0) throw new Error('Division by zero');
         return Number.isInteger(a / b) ? a / b : Number((a / b).toFixed(6));
@@ -124,7 +133,8 @@ class Calculator {
           alert('Modulo by zero is undefined');
           return null;
         }
-        return a % b;
+        const result = a % b;
+        return Number.isInteger(result) ? result : Number(result.toFixed(6));
       },
     };
 
@@ -137,7 +147,35 @@ class Calculator {
   };
 
   evaluateExpression = expression => {
-    const tokens = expression.split(' ').filter(token => token !== '');
+    const tokens = [];
+    let currentNumber = '';
+
+    for (let i = 0; i < expression.length; i++) {
+      const char = expression[i];
+      if (
+        ['+', '-', '×', '÷', '%'].includes(char) &&
+        i > 0 &&
+        expression[i - 1] !== ' '
+      ) {
+        if (currentNumber) {
+          tokens.push(currentNumber);
+          currentNumber = '';
+        }
+        tokens.push(char);
+      } else if (char === ' ') {
+        if (currentNumber) {
+          tokens.push(currentNumber);
+          currentNumber = '';
+        }
+      } else {
+        currentNumber += char;
+      }
+    }
+
+    if (currentNumber) {
+      tokens.push(currentNumber);
+    }
+
     const values = [];
     const operators = [];
 
@@ -151,9 +189,7 @@ class Calculator {
     };
 
     for (const token of tokens) {
-      if (!isNaN(token)) {
-        values.push(parseFloat(token));
-      } else {
+      if (['+', '-', '×', '÷', '%'].includes(token)) {
         while (
           operators.length > 0 &&
           this.getOperatorPrecedence(operators[operators.length - 1]) >=
@@ -162,6 +198,8 @@ class Calculator {
           if (processOperator() === null) return null;
         }
         operators.push(token);
+      } else {
+        values.push(parseFloat(token));
       }
     }
 
@@ -180,13 +218,18 @@ class Calculator {
 
     if (this.displayString === '0' && number !== '.') {
       this.displayString = number;
-    } else if (number === '.' && this.displayString.includes('.')) {
+    } else if (number === '.' && this.getCurrentNumber().includes('.')) {
       return;
     } else {
       this.displayString += number;
     }
 
     this.updateDisplay();
+  }
+
+  getCurrentNumber() {
+    const parts = this.displayString.split(' ');
+    return parts[parts.length - 1] || '';
   }
 
   chooseOperation = op => {
