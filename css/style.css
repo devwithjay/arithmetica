@@ -261,5 +261,49 @@ body {
     position: absolute;
     bottom: 2rem;
     right: 3rem;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .theme-toggle {
+    width: 120px;
+    height: 52px;
+  }
+
+  .theme-toggle .icon svg {
+    height: 26px;
+    width: 26px;
+  }
+
+  .calculator {
+    width: 440px;
+  }
+
+  .button {
+    padding: 22px;
+    font-size: 2rem;
+  }
+
+  .display {
+    padding: 1.6rem 0;
+  }
+
+  .current-op {
+    font-size: 3.2rem;
+  }
+
+  .previous-op {
+    font-size: 1.5rem;
+  }
+
+  .github-logo {
+    width: 44px;
+    height: 44px;
   }
 }
